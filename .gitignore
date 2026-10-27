@@ -1,0 +1,16 @@
+# Arquivos sensíveis
+.env
+.env.*
+
+# Ambiente virtual Python
+venv/
+.venv/
+app/Include/
+app/Lib/
+app/Scripts/
+app/pyvenv.cfg
+
+# Cache Python
+__pycache__/
+*.py[cod]
+.pytest_cache/

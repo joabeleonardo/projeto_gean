@@ -1,0 +1,89 @@
+/* Reseta margens e define o tamanho correto dos elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Container principal usando Flexbox para alinhar lado a lado */
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6;
+}
+
+/* Estilo do Menu Lateral */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    flex-shrink: 0; /* Impede o menu de encolher se a tela for pequena */
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none; /* Remove as bolinhas da lista */
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none; /* Remove o sublinhado azul padrão dos links */
+    display: block;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Animação suave de cor */
+}
+
+.sidebar ul li a:hover, 
+.sidebar ul li a.ativo {
+    background-color: #18bc9c; /* Verde água para destacar */
+    font-weight: bold;
+}
+
+/* Estilo do Conteúdo Principal */
+.conteudo {
+    flex: 1; /* Faz o conteúdo ocupar todo o espaço restante da tela */
+    padding: 20px;
+}
+
+.conteudo header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Cards de Resumo */
+.resumo {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px;
+    text-align: center;
+}
+
+.card.ocupada {
+    background-color: #c0392b;
+}

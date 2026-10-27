@@ -1,0 +1,28 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+# Arquivos sensíveis
+.env
+.env.*
+
+# Ambiente virtual Python
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+venv/
+.venv/
+
+# Cache e arquivos temporários
+__pycache__/
+*.py[cod]
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+venv/
+.venv/
+app/Include/
+app/Lib/
+app/Scripts/
+app/pyvenv.cfg

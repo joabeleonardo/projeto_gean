@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Vagas - Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- MENU LATERAL (Navegação) -->
+        <aside class="sidebar">
+            <h2>Estacionamento</h2>
+            <nav>
+                <ul>
+                    <!-- O atributo href aponta para o nome exato do arquivo HTML -->
+                    <li><a href="index.html" id="link-painel">Painel (Dashboard)</a></li>
+                    <li><a href="movimentacao.html" id="link-movimentacao">Movimentação</a></li>
+                    <li><a href="clientes.html" id="link-clientes">Clientes</a></li>
+                    <li><a href="veiculos.html" id="link-veiculos">Veículos</a></li>
+                    <!-- A classe "ativo" acende este item no menu -->
+                    <li><a href="vagas.html" id="link-vagas" class="ativo">Vagas</a></li>
+                    <li><a href="precos.html" id="link-precos">Preços</a></li>
+                    <li><a href="pagamentos.html" id="link-pagamentos">Pagamentos</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Área Central de Conteúdo -->
+        <main class="conteudo">
+            <header>
+                <h1>Cadastro de Vagas</h1>
+                <span>Logado como: Admin Sistema</span>
+            </header>
+            
+            <!-- Formulário de Cadastro -->
+            <section class="formulario-box">
+                <form id="form-vaga">
+                    <div class="input-group">
+                        <label for="codigo_vaga">Código da Vaga:</label>
+                        <input type="text" id="codigo_vaga" placeholder="Ex: M-01 ou H-05" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="tipo">Tipo de Vaga:</label>
+                        <select id="tipo" required>
+                            <option value="Mensalista">Mensalista</option>
+                            <option value="Horista">Horista</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="status">Status Atual:</label>
+                        <select id="status" required>
+                            <option value="Livre">Livre</option>
+                            <option value="Ocupada">Ocupada</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-salvar">Salvar Vaga</button>
+                </form>
+            </section>
+
+            <!-- Tabela de Listagem -->
+            <section class="tabela-box">
+                <h2>Vagas Cadastradas</h2>
+                <table id="tabela-vagas">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Código</th>
+                            <th>Tipo</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- As linhas das vagas serão inseridas aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script de integração com a API -->
+    <script src="../js/vagas.js"></script>
+</body>
+</html>

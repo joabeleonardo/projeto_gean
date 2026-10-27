@@ -1,0 +1,6 @@
+fastapi[standard]
+mysql-connector-python
+python-dotenv
+sqlmodel
+pytest
+httpx
