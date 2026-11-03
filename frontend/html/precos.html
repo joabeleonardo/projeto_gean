@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Preços · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <p class="ajuda" style="margin-bottom:16px">Somente administradores alteram os preços. Moto e carro têm valores diferentes. O sistema usa estes valores para calcular automaticamente cada saída e cada mensalidade.</p>
+        <div id="grade-precos" class="duas-colunas" style="grid-template-columns:1fr 1fr"></div>
+        <section class="painel" style="margin-top:20px"><h2>Como a cobrança por hora é calculada</h2>
+            <p class="ajuda">A cobrança é <strong>proporcional ao tempo</strong>, por minuto completo: valor da hora × minutos ÷ 60. O <strong>valor mínimo</strong> vale até o tempo mínimo definido e, depois disso, nunca se cobra menos que ele.
+                Exemplo com R$ 12,00/h, mínimo de R$ 3,00 até 15 min: 5 min = R$ 3,00 · 15 min = R$ 3,00 · 30 min = R$ 6,00 · 1h = R$ 12,00 · 1h30 = R$ 18,00 · 2h = R$ 24,00.
+                Deixe o mínimo em 0 para cobrar apenas o proporcional. O preço usado depende da vaga ocupada (carro ou moto). Vagas de mensalista não têm cobrança por hora: a mensalidade rotativa é o valor mensal × cotas e a premium (vaga exclusiva do cliente) tem preço próprio.</p>
+            <p class="ajuda" style="margin-top:8px">O <strong>valor mínimo</strong> e o <strong>tempo mínimo</strong> (em minutos) da cobrança por hora são ajustados aqui, em cada categoria, e valem a partir do próximo cálculo. Cada alteração fica registrada em <em>Logs do sistema</em>.</p>
+        </section>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/precos.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Novo cadastro · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <section class="painel" id="bloco-form">
+            <form id="form-cadastro" novalidate>
+                <p class="ajuda" style="margin-bottom:12px">Preencha na ordem: cada campo só é liberado quando o anterior estiver correto.</p>
+                <div class="form-grid">
+                    <h2 class="sub-titulo">Cliente</h2>
+                    <div class="campo largo"><label for="c-nome">Nome completo (ou razão social)</label><input id="c-nome" maxlength="100" autocomplete="off"></div>
+                    <div class="campo"><label for="c-tipo-doc">Tipo de documento</label>
+                        <select id="c-tipo-doc"><option value="CPF">CPF (pessoa física)</option><option value="CNPJ">CNPJ (pessoa jurídica)</option><option value="Passaporte">Passaporte / doc. estrangeiro</option></select></div>
+                    <div class="campo"><label for="c-doc">Documento</label><input id="c-doc" data-mascara="documento" data-tipo-doc="c-tipo-doc" inputmode="text" placeholder="000.000.000-00" autocomplete="off"></div>
+                    <div class="campo"><label for="c-pais">País</label><input id="c-pais" list="lista-paises" value="Brasil" maxlength="60"><datalist id="lista-paises"><option value="Brasil"><option value="Argentina"><option value="Uruguai"><option value="Paraguai"><option value="Chile"><option value="Bolívia"><option value="Peru"><option value="Colômbia"><option value="Venezuela"><option value="Equador"><option value="México"><option value="Estados Unidos"><option value="Canadá"><option value="Portugal"><option value="Espanha"><option value="Itália"><option value="Alemanha"><option value="França"><option value="Reino Unido"><option value="Japão"><option value="China"><option value="Outro"></datalist></div>
+                    <div class="campo"><label for="c-tel">Telefone</label><input id="c-tel" data-mascara="telefone" inputmode="tel" placeholder="(00) 00000-0000 ou +DDI..." autocomplete="off"></div>
+                    <div class="campo"><label class="campo-check" data-dica="Marque se este número tem WhatsApp"><input type="checkbox" id="c-wa"> Telefone é WhatsApp</label></div>
+                    <div class="campo"><label for="c-tel2">Telefone 2 (opcional)</label><input id="c-tel2" data-mascara="telefone" inputmode="tel" placeholder="(00) 00000-0000" autocomplete="off"></div>
+                    <div class="campo"><label class="campo-check" data-dica="Marque se o telefone 2 tem WhatsApp"><input type="checkbox" id="c-wa2"> Telefone 2 é WhatsApp</label></div>
+
+                    <h2 class="sub-titulo">Endereço <span class="ajuda">(opcional — digite o CEP para preencher sozinho)</span></h2>
+                    <div class="campo"><label for="e-cep">CEP</label><input id="e-cep" data-mascara="cep" inputmode="numeric" placeholder="00000-000" autocomplete="off"></div>
+                    <div class="campo largo"><label for="e-logradouro">Rua / avenida</label><input id="e-logradouro" maxlength="150"></div>
+                    <div class="campo"><label for="e-numero">Número</label><input id="e-numero" maxlength="10"></div>
+                    <div class="campo"><label for="e-complemento">Complemento (opcional)</label><input id="e-complemento" maxlength="50"></div>
+                    <div class="campo"><label for="e-bairro">Bairro</label><input id="e-bairro" maxlength="50"></div>
+                    <div class="campo"><label for="e-cidade">Cidade</label><input id="e-cidade" maxlength="50"></div>
+                    <div class="campo"><label for="e-estado">UF</label><input id="e-estado" maxlength="2" placeholder="SC" style="text-transform:uppercase"></div>
+
+                    <h2 class="sub-titulo">Primeiro veículo <span class="ajuda">(opcional — deixe em branco para cadastrar só o cliente)</span></h2>
+                    <div class="campo"><label for="v-tipo">Tipo</label><select id="v-tipo"><option>Carro</option><option>Moto</option></select></div>
+                    <div class="campo"><label for="v-placa">Placa</label><input id="v-placa" data-mascara="placa" placeholder="ABC-1234 ou ABC1D23" maxlength="8" autocomplete="off"></div>
+                    <div class="campo"><label for="v-marca">Marca</label><input id="v-marca" maxlength="50" placeholder="Ex.: Honda"></div>
+                    <div class="campo"><label for="v-modelo">Modelo</label><input id="v-modelo" maxlength="50" placeholder="Ex.: Civic"></div>
+                    <div class="campo"><label for="v-cor">Cor (opcional)</label><input id="v-cor" maxlength="30"></div>
+
+                    <h2 class="sub-titulo">Plano de mensalista <span class="ajuda">(opcional — vale a partir da data de adesão)</span></h2>
+                    <div class="campo largo"><label class="campo-check"><input type="checkbox" id="m-aderir"> O cliente quer aderir ao plano de mensalista</label></div>
+                    <div id="bloco-plano" class="form-grid" style="grid-column:1/-1" hidden>
+                        <div class="campo"><label for="m-tipo">Tipo de plano</label><select id="m-tipo"><option value="Rotativo">Rotativo (pega a vaga que estiver livre)</option><option value="Premium">Premium (vaga exclusiva do cliente)</option></select></div>
+                        <div class="campo"><label for="m-categoria">Veículo do plano</label><select id="m-categoria"><option>Carro</option><option>Moto</option></select></div>
+                        <div class="campo" id="m-campo-cotas"><label for="m-cotas">Cotas (veículos ao mesmo tempo)</label><input id="m-cotas" type="number" min="1" max="20" value="1"></div>
+                        <div class="campo" id="m-campo-vaga" hidden><label for="m-vaga">Vaga premium</label><select id="m-vaga"></select></div>
+                        <div class="campo"><label for="m-inicio">Data de adesão (início)</label><input id="m-inicio" type="date"></div>
+                        <div class="campo"><label for="m-situacao">1ª mensalidade</label><select id="m-situacao"><option value="Pendente">Pendente (a receber)</option><option value="Pago">Paga agora</option></select></div>
+                        <div class="campo" id="m-campo-forma" hidden><label for="m-forma">Forma de pagamento</label><select id="m-forma"></select></div>
+                        <div class="campo" id="m-campo-recebido" hidden><label for="m-recebido">Valor recebido (R$)</label><input id="m-recebido" type="number" step="0.01" min="0"></div>
+                        <div class="campo" id="m-campo-troco" hidden><label>Troco</label><input id="m-troco" class="somente-leitura" readonly value="—"></div>
+                        <div class="caixa-info" id="m-info" style="grid-column:1/-1"></div>
+                    </div>
+                </div>
+                <div class="acoes"><button class="btn" type="submit">Salvar cadastro</button><button class="btn sec" type="reset">Limpar</button></div>
+            </form>
+        </section>
+        <section class="painel sucesso" id="bloco-continuar" hidden>
+            <h2 id="titulo-continuar"></h2>
+            <p class="ajuda" id="texto-continuar"></p>
+            <div class="chips" id="chips-veiculos"></div>
+            <form id="form-outro-veiculo" class="form-grid" style="margin-top:16px" novalidate>
+                <h2 class="sub-titulo">Cadastrar outro veículo deste cliente</h2>
+                <div class="campo"><label for="o-tipo">Tipo</label><select id="o-tipo"><option>Carro</option><option>Moto</option></select></div>
+                <div class="campo"><label for="o-placa">Placa</label><input id="o-placa" data-mascara="placa" maxlength="8" autocomplete="off"></div>
+                <div class="campo"><label for="o-marca">Marca</label><input id="o-marca" maxlength="50"></div>
+                <div class="campo"><label for="o-modelo">Modelo</label><input id="o-modelo" maxlength="50"></div>
+                <div class="campo"><label for="o-cor">Cor (opcional)</label><input id="o-cor" maxlength="30"></div>
+                <div class="campo"><button class="btn" type="submit">Adicionar veículo</button></div>
+            </form>
+            <div class="acoes"><button class="btn sec" id="btn-novo-cliente" type="button">Cadastrar novo cliente</button><a class="btn sec" href="clientes.html">Ver clientes</a></div>
+        </section>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/cadastro.js"></script>
+</body>
+</html>

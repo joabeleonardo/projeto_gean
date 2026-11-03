@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entrada e saída · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <div class="duas-colunas" style="grid-template-columns:minmax(280px,1fr) 2fr">
+            <section class="painel"><h2>Registrar entrada</h2>
+                <div id="entrada-mov"></div>
+                <p class="ajuda" style="margin-top:12px">Veículo novo? <a href="cadastro.html">Faça o cadastro</a> primeiro. A vaga precisa ser do mesmo tipo do veículo (carro ou moto).</p>
+            </section>
+            <section class="painel">
+                <div class="painel-cab"><h2>No pátio agora</h2><span class="ajuda" id="contagem-patio"></span></div>
+                <div class="tabela-rolagem"><table>
+                    <thead><tr><th>Placa</th><th>Veículo</th><th>Cliente</th><th>Vaga</th><th>Entrada</th><th>Tempo</th><th></th></tr></thead>
+                    <tbody id="tbody-patio"></tbody>
+                </table></div>
+            </section>
+        </div>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/operacao.js"></script>
+<script src="../js/movimentacao.js"></script>
+</body>
+</html>

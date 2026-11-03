@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vagas · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <section class="painel" id="bloco-form" hidden>
+            <h2>Cadastrar vaga</h2>
+            <form id="form-vaga" class="form-grid">
+                <div class="campo"><label for="codigo">Código da vaga</label><input id="codigo" maxlength="10" placeholder="Ex.: A01" required></div>
+                <div class="campo"><label for="categoria">Para qual veículo?</label><select id="categoria"><option value="Carro">Carro</option><option value="Moto">Moto</option></select></div>
+                <div class="campo"><label for="tipo">Tipo de uso</label><select id="tipo"><option value="Horista">Horista (paga por hora)</option><option value="Mensalista">Mensalista rotativa (qualquer mensalista usa a que estiver livre)</option><option value="Premium">Premium (exclusiva de um cliente)</option></select></div>
+                <div class="campo"><button class="btn" type="submit">Salvar vaga</button></div>
+            </form>
+        </section>
+        <section class="painel">
+            <div class="painel-cab"><h2>Vagas cadastradas</h2><span class="ajuda" id="contagem"></span></div>
+            <div class="tabela-rolagem"><table>
+                <thead><tr><th>Código</th><th>Veículo</th><th>Tipo</th><th>Situação</th><th></th></tr></thead>
+                <tbody id="tbody"></tbody>
+            </table></div>
+        </section>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/vagas.js"></script>
+</body>
+</html>

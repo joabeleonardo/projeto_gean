@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Veículos · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <section class="painel">
+            <h2>Cadastrar veículo avulso</h2>
+            <p class="ajuda" style="margin-bottom:10px">Preencha na ordem: cada campo só é liberado quando o anterior estiver correto.</p>
+            <form id="form-veiculo" class="form-grid" novalidate>
+                <div class="campo largo"><label for="cliente-busca">Proprietário (digite nome ou documento e escolha na lista)</label><input id="cliente-busca" autocomplete="off"></div>
+                <div class="campo"><label for="tipo">Tipo</label><select id="tipo"><option>Carro</option><option>Moto</option></select></div>
+                <div class="campo"><label for="placa">Placa</label><input id="placa" data-mascara="placa" maxlength="8" placeholder="ABC-1234 ou ABC1D23" autocomplete="off"></div>
+                <div class="campo"><label for="marca">Marca</label><input id="marca" maxlength="50" placeholder="Ex.: Honda"></div>
+                <div class="campo"><label for="modelo">Modelo</label><input id="modelo" maxlength="50" placeholder="Ex.: Civic"></div>
+                <div class="campo"><label for="cor">Cor (opcional)</label><input id="cor" maxlength="30"></div>
+                <div class="campo"><button class="btn" type="submit">Salvar veículo</button></div>
+            </form>
+        </section>
+        <section class="painel">
+            <h2>Veículos cadastrados</h2>
+            <div class="fila-filtros">
+                <div class="campo"><label for="f-placa">Placa</label><input id="f-placa" type="search" autocomplete="off" placeholder="ABC-1234"></div>
+                <div class="campo"><label for="f-veiculo">Marca / modelo / cor</label><input id="f-veiculo" type="search" autocomplete="off" placeholder="Ex.: Honda"></div>
+                <div class="campo"><label for="f-dono">Proprietário</label><input id="f-dono" type="search" autocomplete="off" placeholder="Parte do nome"></div>
+                <div class="campo"><label for="f-doc">CPF / CNPJ do dono</label><input id="f-doc" type="search" autocomplete="off" placeholder="Só números"></div>
+                <div class="campo"><label for="f-tipo">Tipo</label><select id="f-tipo"><option value="">Carros e motos</option><option>Carro</option><option>Moto</option></select></div>
+                <div class="campo"><label for="f-ordem">Ordenar por</label><select id="f-ordem"><option value="placa">Placa</option><option value="marca">Marca</option><option value="proprietario">Proprietário</option><option value="recentes">Cadastro mais recente</option></select></div>
+                <div class="campo"><button class="btn sec" id="btn-limpar" type="button" data-dica="Apagar todos os filtros">Limpar filtros</button></div>
+            </div>
+            <div class="tabela-rolagem"><table>
+                <thead><tr><th>Placa</th><th>Tipo</th><th>Marca / modelo</th><th>Cor</th><th>Proprietário</th><th></th></tr></thead>
+                <tbody id="tbody"></tbody>
+            </table></div>
+            <div id="paginador"></div>
+        </section>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/veiculos.js"></script>
+</body>
+</html>

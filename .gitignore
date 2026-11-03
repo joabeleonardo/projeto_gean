@@ -1,0 +1,15 @@
+# ambiente virtual (crie fora do projeto ou ignore aqui)
+venv/
+.venv/
+Lib/
+Scripts/
+Include/
+pyvenv.cfg
+
+# segredos
+.env
+
+# caches
+__pycache__/
+*.pyc
+.pytest_cache/

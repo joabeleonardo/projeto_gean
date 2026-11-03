@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pagamentos · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <section class="painel" id="bloco-gerar" hidden>
+            <div class="painel-cab"><h2>Mensalidades dos planos</h2>
+                <button class="btn sec pequeno" id="btn-gerar" type="button" data-dica="Cria agora as mensalidades vencidas dos planos que ainda não foram lançadas (não duplica)">Gerar mensalidades vencidas</button></div>
+            <p class="ajuda">As mensalidades são geradas sozinhas uma vez por dia a partir dos planos. A primeira é criada na adesão. Quem estiver com cobrança vencida aparece em <a href="inadimplencia.html">Inadimplência</a>.</p>
+        </section>
+        <section class="painel">
+            <h2>Pagamentos</h2>
+            <div class="fila-filtros">
+                <div class="campo"><label for="f-cliente">Cliente</label><input id="f-cliente" type="search" autocomplete="off" placeholder="Parte do nome"></div>
+                <div class="campo"><label for="f-status">Situação</label><select id="f-status"><option value="">Todas</option><option>Pendente</option><option>Pago</option></select></div>
+                <div class="campo"><label for="f-tipo">Tipo</label><select id="f-tipo"><option value="">Todos</option><option value="Hora">Por hora</option><option value="Mensal">Mensal</option></select></div>
+                <div class="campo"><label for="f-forma">Forma de pagamento</label><select id="f-forma"><option value="">Todas</option></select></div>
+                <div class="campo"><label for="f-inicio">De</label><input id="f-inicio" type="date"></div>
+                <div class="campo"><label for="f-fim">Até</label><input id="f-fim" type="date"></div>
+                <div class="campo"><button class="btn sec" id="btn-limpar" type="button" data-dica="Apagar todos os filtros">Limpar filtros</button></div>
+            </div>
+            <div class="tabela-rolagem"><table>
+                <thead><tr><th>Cliente / placa</th><th>Tipo</th><th class="num">Valor</th><th>Situação</th><th>Forma</th><th>Vencimento</th><th>Pago em</th><th>Recebido por</th><th></th></tr></thead>
+                <tbody id="tbody"></tbody>
+            </table></div>
+            <div id="paginador"></div>
+        </section>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/operacao.js"></script>
+<script src="../js/pagamentos.js"></script>
+</body>
+</html>

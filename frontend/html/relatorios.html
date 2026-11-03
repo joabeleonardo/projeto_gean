@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Relatórios · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <section class="painel sem-impressao">
+            <form id="form-rel">
+                <div class="fila-filtros">
+                    <div class="campo"><label for="tipo-rel">Relatório</label><select id="tipo-rel">
+                        <optgroup label="Movimento do pátio">
+                            <option value="movimentacoes">Entradas e saídas (quem registrou cada uma)</option>
+                            <option value="veiculo">Por veículo (escolha um ou veja todos)</option>
+                            <option value="dia">Resumo por dia</option>
+                            <option value="mes">Resumo por mês</option></optgroup>
+                        <optgroup label="Financeiro">
+                            <option value="pagamentos">Pagamentos (quem pagou, forma e recebedor)</option>
+                            <option value="recebimentos">Recebimentos por cliente</option>
+                            <option value="caixa">Fechamento de caixa (dinheiro, troco)</option>
+                            <option value="inadimplentes">Inadimplentes</option></optgroup>
+                        <optgroup label="Cadastros">
+                            <option value="clientes">Clientes cadastrados</option>
+                            <option value="veiculos">Veículos cadastrados</option></optgroup></select></div>
+                    <div class="campo" id="campo-inicio"><label for="inicio">De</label><input type="date" id="inicio"></div>
+                    <div class="campo" id="campo-fim"><label for="fim">Até</label><input type="date" id="fim"></div>
+                    <div class="campo" id="campo-veiculo"><label for="f-veic-busca">Veículo (opcional — digite a placa e escolha)</label><input id="f-veic-busca" autocomplete="off" placeholder="Todos os veículos"></div>
+                    <div class="campo" id="campo-placa"><label for="f-placa">Ou parte da placa</label><input id="f-placa" data-mascara="placa" maxlength="8"></div>
+                    <div class="campo" id="campo-cliente" hidden><label for="f-cliente">Cliente (nome)</label><input id="f-cliente" autocomplete="off"></div>
+                    <div class="campo" id="campo-status" hidden><label for="f-status">Situação</label><select id="f-status"><option value="">Todas</option><option>Pendente</option><option>Pago</option></select></div>
+                    <div class="campo" id="campo-tipo" hidden><label for="f-tipo">Tipo</label><select id="f-tipo"><option value="">Todos</option><option value="Hora">Por hora</option><option value="Mensal">Mensal</option></select></div>
+                    <div class="campo" id="campo-forma" hidden><label for="f-forma">Forma de pagamento</label><select id="f-forma"></select></div>
+                    <div class="campo" id="campo-nome" hidden><label for="f-nome">Nome</label><input id="f-nome" autocomplete="off"></div>
+                    <div class="campo" id="campo-doc" hidden><label for="f-doc">CPF / CNPJ</label><input id="f-doc" autocomplete="off"></div>
+                    <div class="campo" id="campo-cadtipo" hidden><label for="f-cadtipo">Mostrar</label><select id="f-cadtipo"></select></div>
+                    <div class="campo" id="campo-pais" hidden><label for="f-pais">Origem</label><select id="f-pais"><option value="">Brasil e exterior</option><option value="brasil">Só do Brasil</option><option value="estrangeiro">Só estrangeiros</option></select></div>
+                    <div class="campo" id="campo-q" hidden><label for="f-q">Busca (placa, marca, modelo, dono)</label><input id="f-q" autocomplete="off"></div>
+                    <div class="campo"><button class="btn" type="submit" data-dica="Montar o relatório com os filtros escolhidos">Gerar relatório</button></div>
+                </div>
+            </form>
+            <div class="acoes" id="atalhos"><button class="btn sec pequeno" data-atalho="hoje" type="button" data-dica="Somente hoje">Hoje</button><button class="btn sec pequeno" data-atalho="mes" type="button" data-dica="Do dia 1º até hoje">Este mês</button><button class="btn sec pequeno" data-atalho="mes-passado" type="button" data-dica="O mês anterior inteiro">Mês passado</button></div>
+        </section>
+        <section class="painel" id="resultado" hidden>
+            <div class="painel-cab"><h2 id="titulo-rel"></h2>
+                <div class="sem-impressao acoes" style="margin:0"><button class="btn sec pequeno" id="btn-csv" type="button" data-dica="Baixar a tabela em CSV (abre no Excel)">Exportar CSV</button><button class="btn sec pequeno" id="btn-imprimir" type="button" data-dica="Imprimir ou salvar como PDF">Imprimir / salvar PDF</button></div></div>
+            <p class="ajuda" id="resumo-rel" style="margin-bottom:10px"></p>
+            <div class="tabela-rolagem"><table><thead id="thead-rel"></thead><tbody id="tbody-rel"></tbody><tfoot id="tfoot-rel"></tfoot></table></div>
+        </section>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/relatorios.js"></script>
+</body>
+</html>

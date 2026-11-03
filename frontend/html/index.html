@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Painel · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <section class="faixa-numeros" id="numeros" aria-label="Resumo das vagas"></section>
+        <div class="layout-painel">
+            <div>
+                <section class="patio" aria-labelledby="t-patio">
+                    <div class="patio-cab">
+                        <h2 id="t-patio">Pátio agora</h2>
+                        <div class="legenda">
+                            <span><i style="background:var(--livre)"></i>Livre</span>
+                            <span><i style="background:#ffb3ac"></i>Ocupada (clique para registrar a saída)</span>
+                            <span><i style="background:var(--placa-azul)"></i>M = mensalista</span>
+                            <span><i style="background:var(--faixa)"></i>P = premium (exclusiva)</span>
+                            <span><i style="background:#8a5300"></i>MOTO = vaga de moto</span>
+                            <span><i style="background:#555e69"></i>Tracejada = vaga inativa</span>
+                        </div>
+                    </div>
+                    <div class="baias" id="baias"></div>
+                </section>
+                <section class="painel"><h2>Vagas por tipo</h2>
+                    <div class="tabela-rolagem"><table class="matriz">
+                        <thead><tr><th>Veículo</th><th>Tipo de vaga</th><th class="num">Total</th><th class="num">Ocupadas</th><th class="num">Livres</th><th>Ocupação</th></tr></thead>
+                        <tbody id="tbody-matriz"></tbody>
+                    </table></div>
+                </section>
+                <section class="painel"><h2>Últimas movimentações</h2>
+                    <ul class="feed" id="feed"></ul>
+                </section>
+                <section class="painel"><h2>Entradas e saídas por dia (últimos 7 dias)</h2>
+                    <div class="grafico" id="grafico-fluxo"></div>
+                    <div class="legenda escura"><span><i style="background:var(--asfalto-3)"></i>Entradas</span><span><i style="background:var(--faixa)"></i>Saídas</span></div>
+                </section>
+            </div>
+            <div>
+                <section class="painel" aria-labelledby="t-rapido">
+                    <h2 id="t-rapido">Registro rápido</h2>
+                    <div class="abas" role="tablist">
+                        <button class="aba" role="tab" aria-selected="true" data-aba="entrada" type="button">Entrada</button>
+                        <button class="aba" role="tab" aria-selected="false" data-aba="saida" type="button">Saída</button>
+                    </div>
+                    <div id="aba-entrada"></div>
+                    <div id="aba-saida" hidden></div>
+                </section>
+                <section class="painel"><h2>Tabela de preços</h2>
+                    <table class="tabela-precos"><thead><tr><th>Veículo</th><th>Por hora</th><th>Mensal</th></tr></thead><tbody id="tbody-precos"></tbody></table>
+                    <p class="ajuda" style="margin-top:8px">Hora cobrada proporcionalmente aos minutos, com valor mínimo. Mensal = valor × cotas.</p>
+                </section>
+                <section class="painel"><div class="painel-cab"><h2>Clientes inadimplentes</h2><a class="btn sec pequeno" href="pagamentos.html">Ver todos</a></div>
+                    <div id="inadimplentes"></div>
+                </section>
+                <section class="painel" id="painel-receita" hidden><h2>Receita por dia (últimos 7 dias)</h2>
+                    <div class="grafico" id="grafico-receita"></div>
+                    <p class="ajuda" id="texto-pendencias" style="margin-top:10px"></p>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/operacao.js"></script>
+<script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Logs do sistema · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <section class="painel sem-impressao">
+            <h2>Filtros</h2>
+            <p class="ajuda" style="margin-bottom:10px">Registro de quem fez o quê, quando: cadastros, edições (com o valor antigo e o novo), exclusões, entradas, saídas, pagamentos e logins.</p>
+            <div class="fila-filtros">
+                <div class="campo"><label for="f-inicio">De</label><input id="f-inicio" type="date"></div>
+                <div class="campo"><label for="f-fim">Até</label><input id="f-fim" type="date"></div>
+                <div class="campo"><label for="f-usuario">Usuário</label><select id="f-usuario"><option value="">Todos</option></select></div>
+                <div class="campo"><label for="f-entidade">Registro</label><select id="f-entidade"><option value="">Todos</option><option>Cliente</option><option>Endereço</option><option>Veículo</option><option>Vaga</option><option>Preço</option><option>Plano</option><option>Pagamento</option><option>Movimentação</option><option>Usuário</option></select></div>
+                <div class="campo"><label for="f-acao">Ação</label><select id="f-acao"><option value="">Todas</option><option value="CRIAR">Cadastro</option><option value="ALTERAR">Alteração</option><option value="EXCLUIR">Exclusão</option><option value="ENTRADA">Entrada no pátio</option><option value="SAIDA">Saída do pátio</option><option value="PAGAMENTO">Pagamento</option><option value="LOGIN">Login</option></select></div>
+                <div class="campo"><label for="f-q">Texto</label><input id="f-q" type="search" autocomplete="off" placeholder="Ex.: telefone, ABC-1234, valor"></div>
+                <div class="campo"><button class="btn sec" id="btn-limpar" type="button" data-dica="Apagar os filtros">Limpar filtros</button></div>
+                <div class="campo"><button class="btn sec" id="btn-csv" type="button" data-dica="Baixar em CSV os registros que correspondem aos filtros (até 5.000)">Exportar CSV</button></div>
+            </div>
+        </section>
+        <section class="painel">
+            <div class="tabela-rolagem"><table>
+                <thead><tr><th>Data e hora</th><th>Usuário</th><th>Ação</th><th>O que aconteceu</th></tr></thead>
+                <tbody id="tbody"></tbody>
+            </table></div>
+            <div id="paginador"></div>
+        </section>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/logs.js"></script>
+</body>
+</html>

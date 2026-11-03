@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entrar · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<main class="login-fundo">
+    <form class="login-cartao" id="form-login">
+        <div class="marca" style="padding:0;color:var(--asfalto)"><span class="marca-sinal">P</span>Estacionamento</div>
+        <h1>Entrar no sistema</h1>
+        <p class="ajuda">Use o login e a senha fornecidos pelo administrador.</p>
+        <div class="campo"><label for="login">Login</label><input id="login" autocomplete="username" required autofocus></div>
+        <div class="campo"><label for="senha">Senha</label><input id="senha" type="password" autocomplete="current-password" required></div>
+        <div class="erro-form" id="erro" role="alert" hidden></div>
+        <button class="btn" type="submit" id="btn-entrar">Entrar</button>
+    </form>
+</main>
+<script src="../js/app.js"></script>
+<script src="../js/login.js"></script>
+</body>
+</html>

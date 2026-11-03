@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usuários · Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="menu" id="menu"></aside>
+    <main class="conteudo">
+        <header class="topo" id="topo"></header>
+        <section class="painel">
+            <h2 id="titulo-form">Novo usuário</h2>
+            <p class="ajuda" style="margin-bottom:12px">O <strong>código de liberação</strong> é um PIN só dos administradores: serve para liberar a entrada de um cliente inadimplente. Cada administrador define o seu.</p>
+            <form id="form-usuario" class="form-grid">
+                <div class="campo largo"><label for="u-nome">Nome</label><input id="u-nome" required minlength="3" maxlength="100"></div>
+                <div class="campo"><label for="u-login">Login</label><input id="u-login" required minlength="3" maxlength="50" autocomplete="off"></div>
+                <div class="campo"><label for="u-perfil">Perfil</label><select id="u-perfil"><option>Operador</option><option>Administrador</option></select></div>
+                <div class="campo"><label for="u-senha" id="rot-senha">Senha</label><input id="u-senha" type="password" minlength="6" maxlength="100" autocomplete="new-password"></div>
+                <div class="campo" id="campo-codigo" hidden><label for="u-codigo" id="rot-codigo">Código de liberação (PIN de 4 a 20 caracteres)</label><input id="u-codigo" type="password" minlength="4" maxlength="20" autocomplete="new-password"></div>
+                <div class="campo"><button class="btn" type="submit" id="btn-salvar">Salvar usuário</button></div>
+                <div class="campo" id="campo-cancelar" hidden><button class="btn sec" type="button" id="btn-cancelar">Cancelar edição</button></div>
+            </form>
+        </section>
+        <section class="painel"><h2>Usuários cadastrados</h2>
+            <div class="tabela-rolagem"><table>
+                <thead><tr><th>Nome</th><th>Login</th><th>Perfil</th><th></th></tr></thead>
+                <tbody id="tbody"></tbody>
+            </table></div>
+        </section>
+    </main>
+</div>
+<script src="../js/app.js"></script>
+<script src="../js/usuarios.js"></script>
+</body>
+</html>
