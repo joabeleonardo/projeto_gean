@@ -1,14 +1,21 @@
 import pytest
 from fastapi import FastAPI
+<<<<<<< HEAD
 from fastapi.testclient import TestClient as ClienteHttp
+=======
+from fastapi.testclient import TestClient
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 from unittest.mock import patch, MagicMock
 
 # Importações do projeto ajustadas sem o prefixo 'app.'
 from rotas.clientes_rotas import clientes_router
 from entidades.entidades import Cliente
 from dependencies.database import get_db
+<<<<<<< HEAD
 from dependencies.auth import get_usuario_atual
 from entidades.entidades import Usuario as _Usuario, PerfilEnum as _Perfil
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 # Configura o app e rota de teste
 app = FastAPI()
@@ -19,20 +26,31 @@ def override_get_db():
     yield MagicMock()
 
 app.dependency_overrides[get_db] = override_get_db
+<<<<<<< HEAD
 app.dependency_overrides[get_usuario_atual] = lambda: _Usuario(
     id=1, nome="Admin Sistema", login="admin", senha="x", perfil=_Perfil.Administrador
 )
 
 # Faz chamada simulando rotas
 client = ClienteHttp(app)
+=======
+
+# Faz chamada simulando rotas
+client = TestClient(app)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 # ==========================================
 # DADOS MOCKADOS
 # ==========================================
 MOCK_CLIENTE_PAYLOAD = {
     "nome": "Carlos Silva",
+<<<<<<< HEAD
     "cpf": "529.982.247-25",
     "telefone": "(11) 99999-9999",
+=======
+    "cpf": "111.111.111-11",
+    "telefone": "11999999999",
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     "id_endereco": 1,
     "id_usuario_logado": 1,
     "nome_usuario_logado": "Admin Sistema"
@@ -42,8 +60,13 @@ MOCK_CLIENTE_PAYLOAD = {
 MOCK_CLIENTE_RESPOSTA = Cliente(
     id=1,
     nome="Carlos Silva",
+<<<<<<< HEAD
     cpf="529.982.247-25",
     telefone="(11) 99999-9999",
+=======
+    cpf="111.111.111-11",
+    telefone="11999999999",
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     id_endereco=1
 )
 

@@ -2,16 +2,20 @@ from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, List
 from datetime import datetime, date
 from enum import Enum
+<<<<<<< HEAD
 from datetime import date
 from sqlalchemy import DateTime, UniqueConstraint
 
 from servicos.datas import agora_local
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 
 class PerfilEnum(str, Enum):
     Administrador = 'Administrador'
     Operador = 'Operador'
 
+<<<<<<< HEAD
 
 class TipoDocumentoEnum(str, Enum):
     CPF = 'CPF'
@@ -29,6 +33,8 @@ class CategoriaEnum(str, Enum):
     Carro = 'Carro'
     Moto = 'Moto'
 
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 class Endereco(SQLModel, table=True):
     __tablename__ = "tb_enderecos"
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -45,6 +51,7 @@ class Cliente(SQLModel, table=True):
     __tablename__ = "tb_clientes"
     id: Optional[int] = Field(default=None, primary_key=True)
     nome: str = Field(max_length=100)
+<<<<<<< HEAD
     # coluna "cpf" guarda o documento do cliente: CPF, CNPJ ou passaporte (ver tipo_documento).
     # O nome da coluna foi mantido para não quebrar as triggers de auditoria de tb_clientes.
     cpf: str = Field(max_length=18, unique=True)
@@ -54,6 +61,10 @@ class Cliente(SQLModel, table=True):
     telefone_whatsapp: bool = Field(default=False)
     telefone2: Optional[str] = Field(default=None, max_length=20)
     telefone2_whatsapp: bool = Field(default=False)
+=======
+    cpf: str = Field(max_length=14, unique=True)
+    telefone: Optional[str] = Field(default=None, max_length=20)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     id_endereco: Optional[int] = Field(default=None, foreign_key="tb_enderecos.id")
    
     # Relacionamentos
@@ -71,10 +82,15 @@ class Veiculo(SQLModel, table=True):
     
     id: Optional[int] = Field(default=None, primary_key=True)
     placa: str = Field(max_length=10, unique=True)
+<<<<<<< HEAD
     marca: Optional[str] = Field(default=None, max_length=50)
     modelo: str = Field(max_length=50)
     cor: Optional[str] = Field(default=None, max_length=30)
     tipo_veiculo: CategoriaEnum = Field(default=CategoriaEnum.Carro)
+=======
+    modelo: str = Field(max_length=50)
+    cor: Optional[str] = Field(default=None, max_length=30)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     id_cliente: int = Field(foreign_key="tb_clientes.id")
 
     # Relacionamento reverso com clientes
@@ -84,9 +100,14 @@ class Veiculo(SQLModel, table=True):
 #VAGAS
 #================================================
 class TipoVagaEnum(str, Enum):
+<<<<<<< HEAD
     Mensalista = 'Mensalista'   # vaga rotativa de mensalista (qualquer mensalista usa a que estiver livre)
     Horista = 'Horista'
     Premium = 'Premium'         # vaga exclusiva de um cliente mensalista (plano premium)
+=======
+    Mensalista = 'Mensalista'
+    Horista = 'Horista'
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 class StatusVagaEnum(str, Enum):
     Livre = 'Livre'
@@ -98,10 +119,14 @@ class Vaga(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     codigo_vaga: str = Field(max_length=10, unique=True)
     tipo: TipoVagaEnum
+<<<<<<< HEAD
     categoria: CategoriaEnum = Field(default=CategoriaEnum.Carro)
     status: StatusVagaEnum = Field(default=StatusVagaEnum.Livre)
     # False = vaga inativa (ex.: em reforma): não aparece como disponível e não recebe entradas
     ativa: bool = Field(default=True)
+=======
+    status: StatusVagaEnum = Field(default=StatusVagaEnum.Livre)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
     # Relacionamento reverso com movimentações (se aplicável)
     movimentacoes: List["Movimentacao"] = Relationship(back_populates="vaga")
@@ -113,6 +138,7 @@ class Vaga(SQLModel, table=True):
 class TipoCobrancaEnum(str, Enum):
     Horista = "Horista"
     Mensalista = "Mensalista"
+<<<<<<< HEAD
     Premium = "Premium"
 
 class Preco(SQLModel, table=True):
@@ -128,6 +154,15 @@ class Preco(SQLModel, table=True):
     # Cobrança por hora: valor mínimo e quantos minutos ele cobre (só usados no tipo Horista)
     valor_minimo: float = Field(default=0.0)
     tempo_minimo_minutos: int = Field(default=0)
+=======
+
+class Preco(SQLModel, table=True):
+    __tablename__ = "tb_precos"
+    
+    id: Optional[int] = Field(default=None, primary_key=True)
+    tipo_cobranca: TipoCobrancaEnum = Field(unique=True)
+    valor: float = Field(default=0.0)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 #================================================
 #USUARIOS
@@ -139,22 +174,31 @@ class Usuario(SQLModel, table=True):
     nome: str = Field(max_length=100)
     login: str = Field(max_length=50, unique=True)
     senha: str = Field(max_length=255)
+<<<<<<< HEAD
     # str (e não Enum) para aceitar qualquer valor já gravado na coluna (ENUM ou VARCHAR)
     perfil: str = Field(default="Operador", max_length=30)
     # PIN do administrador para liberar entrada de cliente inadimplente (guardado com hash)
     codigo_liberacao: Optional[str] = Field(default=None, max_length=255)
+=======
+    perfil: PerfilEnum = Field(default=PerfilEnum.Operador)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 #================================================
 #USUARIOS
 #================================================
 class Movimentacao(SQLModel, table=True):
+<<<<<<< HEAD
     __tablename__ = "tb_movimentacao"
+=======
+    __tablename__ = "tb_movimentacoes"
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
     id: Optional[int] = Field(default=None, primary_key=True)
 
     id_veiculo: int = Field(foreign_key="tb_veiculos.id")
     id_vaga: int = Field(foreign_key="tb_vagas.id")
 
+<<<<<<< HEAD
     # DATETIME sem fuso = relógio local do estabelecimento (ver servicos/datas.py).
     # sa_type explícito: sem ele, SQLModel >= 0.0.45 usa um tipo UTC que exige
     # datetimes com fuso na escrita e devolve datetimes com fuso na leitura.
@@ -162,13 +206,22 @@ class Movimentacao(SQLModel, table=True):
     id_usuario_entrada: int = Field(foreign_key="tb_usuarios.id")
 
     data_saida: Optional[datetime] = Field(default=None, sa_type=DateTime(timezone=False))
+=======
+    data_entrada: datetime = Field(default_factory=datetime.now)
+    id_usuario_entrada: int = Field(foreign_key="tb_usuarios.id")
+
+    data_saida: Optional[datetime] = Field(default=None)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     id_usuario_saida: Optional[int] = Field(
         default=None,
         foreign_key="tb_usuarios.id"
     )
+<<<<<<< HEAD
     # Entrada liberada com o código de um administrador (cliente inadimplente)
     id_usuario_liberacao: Optional[int] = Field(default=None)
     obs_liberacao: Optional[str] = Field(default=None, max_length=255)
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
     vaga: Optional["Vaga"] = Relationship(back_populates="movimentacoes")    
 
@@ -192,7 +245,11 @@ class Pagamento(SQLModel, table=True):
 
     id_movimentacao: Optional[int] = Field(
         default=None,
+<<<<<<< HEAD
         foreign_key="tb_movimentacao.id"
+=======
+        foreign_key="tb_movimentacoes.id"
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     )
 
     id_cliente: Optional[int] = Field(
@@ -203,22 +260,30 @@ class Pagamento(SQLModel, table=True):
     tipo_cobranca: TipoPagamentoEnum
     valor_total: float = Field(ge=0.0)
     data_vencimento: Optional[date] = Field(default=None)
+<<<<<<< HEAD
     data_pagamento: Optional[datetime] = Field(default=None, sa_type=DateTime(timezone=False))
+=======
+    data_pagamento: Optional[datetime] = Field(default=None)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
     status: StatusPagamentoEnum = Field(
         default=StatusPagamentoEnum.Pendente
     )
 
+<<<<<<< HEAD
     # Dinheiro, Pix, Cartão de débito, Cartão de crédito, Transferência
     forma_pagamento: Optional[str] = Field(default=None, max_length=20)
     # Pagamento em dinheiro: quanto o cliente entregou e quanto voltou de troco
     valor_recebido: Optional[float] = Field(default=None)
     troco: Optional[float] = Field(default=None)
 
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     id_usuario_recebimento: Optional[int] = Field(
         default=None,
         foreign_key="tb_usuarios.id"
     )
+<<<<<<< HEAD
 
 
 
@@ -254,3 +319,5 @@ class LogSistema(SQLModel, table=True):
     campo: Optional[str] = Field(default=None, max_length=60)
     valor_antigo: Optional[str] = Field(default=None)
     valor_novo: Optional[str] = Field(default=None)
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

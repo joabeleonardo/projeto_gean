@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from pydantic import BaseModel, Field, field_validator, model_validator
 from typing import Optional, List
 from enum import Enum
@@ -139,11 +140,33 @@ class ClienteEdicao(_Telefones):
 class ClienteCreate(ClienteEntrada, AuditoriaBase):
     id_endereco: Optional[int] = Field(default=None)
 
+=======
+from pydantic import BaseModel, Field
+from typing import Optional
+from enum import Enum
+from datetime import datetime, date
+
+
+class AuditoriaBase(BaseModel):
+    # Todo endpoint de INSERT/UPDATE/DELETE exigirá esses campos no Payload
+    id_usuario_logado: int = Field(description="ID do operador logado no sistema")
+    nome_usuario_logado: str = Field(description="Nome do operador logado no sistema")
+
+class ClienteBase(BaseModel):
+    nome: str = Field(min_length=3, max_length=100)
+    cpf: str = Field(min_length=11, max_length=14)
+    telefone: Optional[str] = Field(default=None, max_length=20)
+    id_endereco: Optional[int] = Field(default=None)
+
+class ClienteCreate(ClienteBase, AuditoriaBase):
+    pass
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 class ClientePublico(ClienteBase):
     id: int
 
 
+<<<<<<< HEAD
 # ================================================
 # VEÍCULOS
 # ================================================
@@ -173,10 +196,26 @@ class VeiculoEntrada(BaseModel):
 class VeiculoCreate(VeiculoEntrada, AuditoriaBase):
     id_cliente: int = Field(description="ID do cliente proprietário do veículo")
 
+=======
+#================================================
+#VEÍCULOS
+#================================================
+# Herança de auditoria que já criamos anteriormente
+
+class VeiculoBase(BaseModel):
+    placa: str = Field(min_length=7, max_length=10)
+    modelo: str = Field(min_length=2, max_length=50)
+    cor: Optional[str] = Field(default=None, max_length=30)
+    id_cliente: int = Field(description="ID do cliente proprietário do veículo")
+
+class VeiculoCreate(VeiculoBase, AuditoriaBase):
+    pass
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 class VeiculoPublico(VeiculoBase):
     id: int
 
+<<<<<<< HEAD
 
 class VeiculoDetalhe(VeiculoPublico):
     cliente_nome: Optional[str] = None
@@ -193,15 +232,28 @@ class TipoVagaEnum(str, Enum):
     Horista = 'Horista'
     Premium = 'Premium'
 
+=======
+#================================================
+#VAGAS
+#================================================
+class TipoVagaEnum(str, Enum):
+    Mensalista = 'Mensalista'
+    Horista = 'Horista'
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 class StatusVagaEnum(str, Enum):
     Livre = 'Livre'
     Ocupada = 'Ocupada'
 
+<<<<<<< HEAD
+=======
+# Auditoria Base já utilizada nos outros módulos
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 class VagaBase(BaseModel):
     codigo_vaga: str = Field(min_length=1, max_length=10)
     tipo: TipoVagaEnum
+<<<<<<< HEAD
     categoria: CategoriaEnum = Field(default=CategoriaEnum.Carro)
     status: StatusVagaEnum = Field(default=StatusVagaEnum.Livre)
 
@@ -235,10 +287,32 @@ class PrecoBase(BaseModel):
     valor_minimo: float = Field(default=0.0, ge=0.0, description="Cobrança mínima por hora (0 = sem mínimo)")
     tempo_minimo_minutos: int = Field(default=0, ge=0, le=1440, description="Até quantos minutos vale o valor mínimo")
 
+=======
+    status: StatusVagaEnum = Field(default=StatusVagaEnum.Livre)
+
+class VagaCreate(VagaBase, AuditoriaBase):
+    pass
+
+class VagaPublico(VagaBase):
+    id: int
+
+
+#================================================
+#PREÇOS
+#================================================
+class TipoCobrancaEnum(str, Enum):
+    Horista = "Horista"
+    Mensalista = "Mensalista"
+
+class PrecoBase(BaseModel):
+    tipo_cobranca: TipoCobrancaEnum
+    valor: float = Field(ge=0.0, description="Valor cobrado (por hora ou mensal)")
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 class PrecoCreate(PrecoBase, AuditoriaBase):
     pass
 
+<<<<<<< HEAD
 
 class PrecoPublico(PrecoBase):
     id: int
@@ -247,16 +321,28 @@ class PrecoPublico(PrecoBase):
 # ================================================
 # USUÁRIOS
 # ================================================
+=======
+class PrecoPublico(PrecoBase):
+    id: int
+
+#================================================
+#USUÁRIOS
+#================================================
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 class PerfilEnum(str, Enum):
     Administrador = 'Administrador'
     Operador = 'Operador'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 class UsuarioBase(BaseModel):
     nome: str = Field(min_length=3, max_length=100)
     login: str = Field(min_length=3, max_length=50)
     perfil: PerfilEnum = Field(default=PerfilEnum.Operador)
 
+<<<<<<< HEAD
 
 class UsuarioCreate(UsuarioBase, AuditoriaBase):
     senha: str = Field(min_length=6, max_length=100)
@@ -311,6 +397,24 @@ class MovimentacaoSaidaUpdate(AuditoriaBase):
     forma_pagamento: Optional[FormaPagamentoEnum] = Field(default=None, description="Obrigatória quando há valor a receber")
     valor_recebido: Optional[float] = Field(default=None, ge=0.0, description="Pagamento em dinheiro: quanto o cliente entregou")
 
+=======
+class UsuarioCreate(UsuarioBase, AuditoriaBase):
+    senha: str = Field(min_length=6, max_length=255)
+
+class UsuarioPublico(UsuarioBase):
+    id: int
+#================================================
+#MOVIMENTAÇÕES
+#================================================
+
+class MovimentacaoEntradaCreate(AuditoriaBase):
+    id_veiculo: int = Field(description="ID do veículo entrando no estacionamento")
+    id_vaga: int = Field(description="ID da vaga sendo ocupada")
+    id_usuario_entrada: int = Field(description="ID do operador que registrou a entrada")
+
+class MovimentacaoSaidaUpdate(AuditoriaBase):
+    id_usuario_saida: int = Field(description="ID do operador que registrou a saída")
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 class MovimentacaoPublico(BaseModel):
     id: int
@@ -320,6 +424,7 @@ class MovimentacaoPublico(BaseModel):
     id_usuario_entrada: int
     data_saida: Optional[datetime] = None
     id_usuario_saida: Optional[int] = None
+<<<<<<< HEAD
     # Preenchidos apenas na resposta de saída
     permanencia_minutos: Optional[int] = None
     valor_total: Optional[float] = None
@@ -356,15 +461,24 @@ class MovimentacaoPatio(BaseModel):
 # ================================================
 # PAGAMENTOS
 # ================================================
+=======
+#================================================
+#PAGAMENTOS
+#================================================
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 class TipoPagamentoEnum(str, Enum):
     Mensal = 'Mensal'
     Hora = 'Hora'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 class StatusPagamentoEnum(str, Enum):
     Pendente = 'Pendente'
     Pago = 'Pago'
 
+<<<<<<< HEAD
 
 class PagamentoCreate(AuditoriaBase):
     id_movimentacao: Optional[int] = Field(default=None, description="ID da movimentação (cobrança por hora)")
@@ -380,6 +494,15 @@ class PagamentoCreate(AuditoriaBase):
     status: Optional[StatusPagamentoEnum] = Field(default=StatusPagamentoEnum.Pago)
     id_usuario_recebimento: Optional[int] = Field(default=None, description="Preenchido pelo servidor")
 
+=======
+class PagamentoCreate(AuditoriaBase):
+    id_movimentacao: Optional[int] = Field(default=None, description="ID da movimentação (se for cobrança por hora)")
+    id_cliente: Optional[int] = Field(default=None, description="ID do cliente (se for mensalidade)")
+    tipo_cobranca: TipoPagamentoEnum
+    valor_total: float = Field(ge=0.0, description="Valor total da cobrança")
+    data_vencimento: Optional[date] = Field(default=None, description="Data de vencimento")
+    id_usuario_recebimento: int = Field(description="ID do operador que registrou o pagamento")
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 class PagamentoPublico(BaseModel):
     id: int
@@ -390,6 +513,7 @@ class PagamentoPublico(BaseModel):
     data_vencimento: Optional[date] = None
     data_pagamento: Optional[datetime] = None
     status: StatusPagamentoEnum
+<<<<<<< HEAD
     forma_pagamento: Optional[str] = None
     valor_recebido: Optional[float] = None
     troco: Optional[float] = None
@@ -524,3 +648,9 @@ class ModoEntrada(BaseModel):
     cliente_nome: Optional[str] = None
     categoria: str = "Carro"
     mensagem: str = ""
+=======
+    id_usuario_recebimento: Optional[int] = None
+#================================================
+#VEÍCULOS
+#================================================
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

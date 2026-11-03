@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Clientes · Estacionamento</title>
     <link rel="stylesheet" href="../css/style.css">
@@ -40,3 +41,80 @@
 <script src="../js/clientes.js"></script>
 </body>
 </html>
+=======
+    <title>Gestão de Clientes</title>
+    <!-- Reaproveitamos o estilo principal e adicionamos um para formulários -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+<body>
+    <div class="container">
+        <!-- O Menu Lateral pode ser copiado do index.html para manter a navegação -->
+        <!-- MENU LATERAL (Navegação) -->
+        <aside class="sidebar">
+            <h2>Estacionamento</h2>
+            <nav>
+                <ul>
+                    <!-- O atributo href aponta para o nome exato do arquivo HTML -->
+                    <li><a href="index.html" id="link-painel">Painel (Dashboard)</a></li>
+                    <li><a href="movimentacao.html" id="link-movimentacao">Movimentação</a></li>
+                    <li><a href="clientes.html" id="link-clientes">Clientes</a></li>
+                    <li><a href="veiculos.html" id="link-veiculos">Veículos</a></li>
+                    <li><a href="vagas.html" id="link-vagas">Vagas</a></li>
+                    <li><a href="precos.html" id="link-precos">Preços</a></li>
+                    <li><a href="pagamentos.html" id="link-pagamentos">Pagamentos</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="conteudo">
+            <header>
+                <h1>Cadastro de Clientes</h1>
+                <span>Logado como: Admin Sistema</span>
+            </header>
+
+            <!-- Área do Formulário -->
+            <section class="formulario-box">
+                <form id="form-cliente">
+                    <div class="input-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" required placeholder="Ex: Carlos Silva">
+                    </div>
+                    <div class="input-group">
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" required placeholder="000.000.000-00">
+                    </div>
+                    <div class="input-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" id="telefone" placeholder="(11) 99999-9999">
+                    </div>
+                    <button type="submit" class="btn-salvar">Salvar Cliente</button>
+                </form>
+            </section>
+
+            <!-- Área da Tabela -->
+            <section class="tabela-box">
+                <h2>Clientes Cadastrados</h2>
+                <table id="tabela-clientes">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas injetadas pelo JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script que fará a comunicação com o FastAPI -->
+    <script src="../js/clientes.js"></script>
+</body>
+</html>
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

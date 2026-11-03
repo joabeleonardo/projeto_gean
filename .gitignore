@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ambiente virtual (crie fora do projeto ou ignore aqui)
 venv/
 .venv/
@@ -13,3 +14,21 @@ pyvenv.cfg
 __pycache__/
 *.pyc
 .pytest_cache/
+=======
+# Arquivos sensíveis
+.env
+.env.*
+
+# Ambiente virtual Python
+venv/
+.venv/
+app/Include/
+app/Lib/
+app/Scripts/
+app/pyvenv.cfg
+
+# Cache Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

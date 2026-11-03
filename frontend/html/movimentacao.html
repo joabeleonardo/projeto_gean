@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Entrada e saída · Estacionamento</title>
     <link rel="stylesheet" href="../css/style.css">
@@ -31,3 +32,88 @@
 <script src="../js/movimentacao.js"></script>
 </body>
 </html>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentação - Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- MENU LATERAL (Navegação) -->
+        <aside class="sidebar">
+            <h2>Estacionamento</h2>
+            <nav>
+                <ul>
+                    <!-- O atributo href aponta para o nome exato do arquivo HTML -->
+                    <li><a href="index.html" id="link-painel">Painel (Dashboard)</a></li>
+                    <!-- A classe "ativo" acende este item no menu -->
+                    <li><a href="movimentacao.html" id="link-movimentacao" class="ativo">Movimentação</a></li>
+                    <li><a href="clientes.html" id="link-clientes">Clientes</a></li>
+                    <li><a href="veiculos.html" id="link-veiculos">Veículos</a></li>
+                    <li><a href="vagas.html" id="link-vagas">Vagas</a></li>
+                    <li><a href="precos.html" id="link-precos">Preços</a></li>
+                    <li><a href="pagamentos.html" id="link-pagamentos">Pagamentos</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Área Central de Conteúdo -->
+        <main class="conteudo">
+            <header>
+                <h1>Controle de Pátio (Entrada e Saída)</h1>
+                <span>Logado como: Admin Sistema</span>
+            </header>
+            
+            <!-- Formulário de Registro de Entrada -->
+            <section class="formulario-box">
+                <h2>Registrar Entrada</h2>
+                <form id="form-entrada">
+                    <div class="input-group">
+                        <label for="id_veiculo">Veículo (Placa e Modelo):</label>
+                        <!-- Select que será preenchido pelo JavaScript com os veículos do banco -->
+                        <select id="id_veiculo" required>
+                            <option value="">Carregando veículos...</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_vaga">Vaga Destino:</label>
+                        <!-- Select que será preenchido pelo JavaScript com as vagas livres -->
+                        <select id="id_vaga" required>
+                            <option value="">Carregando vagas livres...</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-salvar">Confirmar Entrada</button>
+                </form>
+            </section>
+
+            <!-- Tabela de Listagem de Veículos no Pátio -->
+            <section class="tabela-box">
+                <h2>Veículos Estacionados</h2>
+                <table id="tabela-movimentacao">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Veículo</th>
+                            <th>Vaga</th>
+                            <th>Entrada</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- As linhas dos veículos estacionados serão inseridas aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script de integração com a API -->
+    <script src="../js/movimentacao.js"></script>
+</body>
+</html>
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

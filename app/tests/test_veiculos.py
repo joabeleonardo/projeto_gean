@@ -1,13 +1,20 @@
 import pytest
 from fastapi import FastAPI
+<<<<<<< HEAD
 from fastapi.testclient import TestClient as ClienteHttp
+=======
+from fastapi.testclient import TestClient
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 from unittest.mock import patch, MagicMock
 
 from rotas.veiculos_rotas import veiculos_router
 from entidades.entidades import Veiculo
 from dependencies.database import get_db
+<<<<<<< HEAD
 from dependencies.auth import get_usuario_atual
 from entidades.entidades import Usuario as _Usuario, PerfilEnum as _Perfil
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 # Configura o app e rota de teste
 app = FastAPI()
@@ -18,20 +25,30 @@ def override_get_db():
     yield MagicMock()
 
 app.dependency_overrides[get_db] = override_get_db
+<<<<<<< HEAD
 app.dependency_overrides[get_usuario_atual] = lambda: _Usuario(
     id=1, nome="Admin Sistema", login="admin", senha="x", perfil=_Perfil.Administrador
 )
 
 # Faz chamada simulando rotas
 client = ClienteHttp(app)
+=======
+
+# Faz chamada simulando rotas
+client = TestClient(app)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 # ==========================================
 # DADOS MOCKADOS
 # ==========================================
 MOCK_VEICULO_PAYLOAD = {
     "placa": "ABC-1234",
+<<<<<<< HEAD
     "marca": "Honda",
     "modelo": "Civic",
+=======
+    "modelo": "Honda Civic",
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     "cor": "Prata",
     "id_cliente": 1,
     "id_usuario_logado": 1,
@@ -42,8 +59,12 @@ MOCK_VEICULO_PAYLOAD = {
 MOCK_VEICULO_RESPOSTA = Veiculo(
     id=1,
     placa="ABC-1234",
+<<<<<<< HEAD
     marca="Honda",
     modelo="Civic",
+=======
+    modelo="Honda Civic",
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     cor="Prata",
     id_cliente=1
 )

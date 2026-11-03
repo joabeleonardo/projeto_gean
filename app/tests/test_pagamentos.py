@@ -1,13 +1,20 @@
 import pytest
 from fastapi import FastAPI
+<<<<<<< HEAD
 from fastapi.testclient import TestClient as ClienteHttp
+=======
+from fastapi.testclient import TestClient
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 from unittest.mock import patch, MagicMock
 
 from rotas.pagamentos_rotas import pagamentos_router
 from entidades.entidades import Pagamento, TipoPagamentoEnum, StatusPagamentoEnum
 from dependencies.database import get_db
+<<<<<<< HEAD
 from dependencies.auth import get_usuario_atual
 from entidades.entidades import Usuario as _Usuario, PerfilEnum as _Perfil
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 app = FastAPI()
 app.include_router(pagamentos_router)
@@ -16,10 +23,14 @@ def override_get_db():
     yield MagicMock()
 
 app.dependency_overrides[get_db] = override_get_db
+<<<<<<< HEAD
 app.dependency_overrides[get_usuario_atual] = lambda: _Usuario(
     id=1, nome="Admin Sistema", login="admin", senha="x", perfil=_Perfil.Administrador
 )
 client = ClienteHttp(app)
+=======
+client = TestClient(app)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 MOCK_PAGAMENTO_PAYLOAD = {
     "id_cliente": 1,

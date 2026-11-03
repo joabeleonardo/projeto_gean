@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pagamentos · Estacionamento</title>
     <link rel="stylesheet" href="../css/style.css">
@@ -40,3 +41,111 @@
 <script src="../js/pagamentos.js"></script>
 </body>
 </html>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Pagamentos - Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- MENU LATERAL (Navegação) -->
+        <aside class="sidebar">
+            <h2>Estacionamento</h2>
+            <nav>
+                <ul>
+                    <!-- O atributo href aponta para o nome exato do arquivo HTML -->
+                    <li><a href="index.html" id="link-painel">Painel (Dashboard)</a></li>
+                    <li><a href="movimentacao.html" id="link-movimentacao">Movimentação</a></li>
+                    <li><a href="clientes.html" id="link-clientes">Clientes</a></li>
+                    <li><a href="veiculos.html" id="link-veiculos">Veículos</a></li>
+                    <li><a href="vagas.html" id="link-vagas">Vagas</a></li>
+                    <li><a href="precos.html" id="link-precos">Preços</a></li>
+                    <!-- A classe "ativo" acende este item no menu -->
+                    <li><a href="pagamentos.html" id="link-pagamentos" class="ativo">Pagamentos</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Área Central de Conteúdo -->
+        <main class="conteudo">
+            <header>
+                <h1>Gestão de Pagamentos e Recebimentos</h1>
+                <span>Logado como: Admin Sistema</span>
+            </header>
+            
+            <!-- Formulário de Pagamento -->
+            <section class="formulario-box">
+                <h2>Registrar Novo Pagamento</h2>
+                <form id="form-pagamento">
+                    <div class="input-group">
+                        <label for="tipo_cobranca">Tipo de Cobrança:</label>
+                        <select id="tipo_cobranca" required>
+                            <option value="Hora">Avulso (Horista)</option>
+                            <option value="Mensal">Mensalidade (Mensalista)</option>
+                        </select>
+                    </div>
+
+                    <!-- Campos dinâmicos: O usuário escolhe se vincula a um cliente ou a uma movimentação -->
+                    <div class="input-group">
+                        <label for="id_cliente">Cliente (Para Mensalistas):</label>
+                        <select id="id_cliente">
+                            <option value="">Selecione um cliente (Opcional)</option>
+                            <!-- Injetado via JS -->
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="id_movimentacao">Movimentação (Para Horistas):</label>
+                        <select id="id_movimentacao">
+                            <option value="">Selecione uma movimentação (Opcional)</option>
+                            <!-- Injetado via JS -->
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="valor_total">Valor Total (R$):</label>
+                        <input type="number" id="valor_total" step="0.01" min="0" placeholder="Ex: 45.00" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="status">Status do Pagamento:</label>
+                        <select id="status" required>
+                            <option value="Pago">Pago</option>
+                            <option value="Pendente">Pendente</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-salvar">Registrar Pagamento</button>
+                </form>
+            </section>
+
+            <!-- Tabela de Pagamentos -->
+            <section class="tabela-box">
+                <h2>Histórico de Pagamentos</h2>
+                <table id="tabela-pagamentos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                            <th>Valor (R$)</th>
+                            <th>Status</th>
+                            <th>Data Pagamento</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas geradas dinamicamente pelo JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script de integração com a API -->
+    <script src="../js/pagamentos.js"></script>
+</body>
+</html>
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

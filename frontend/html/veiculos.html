@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Veículos · Estacionamento</title>
     <link rel="stylesheet" href="../css/style.css">
@@ -47,3 +48,95 @@
 <script src="../js/veiculos.js"></script>
 </body>
 </html>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Veículos - Estacionamento</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- MENU LATERAL (Navegação) -->
+        <aside class="sidebar">
+            <h2>Estacionamento</h2>
+            <nav>
+                <ul>
+                    <!-- O atributo href aponta para o nome exato do arquivo HTML -->
+                    <li><a href="index.html" id="link-painel">Painel (Dashboard)</a></li>
+                    <li><a href="movimentacao.html" id="link-movimentacao">Movimentação</a></li>
+                    <li><a href="clientes.html" id="link-clientes">Clientes</a></li>
+                    <!-- A classe "ativo" acende este item no menu -->
+                    <li><a href="veiculos.html" id="link-veiculos" class="ativo">Veículos</a></li>
+                    <li><a href="vagas.html" id="link-vagas">Vagas</a></li>
+                    <li><a href="precos.html" id="link-precos">Preços</a></li>
+                    <li><a href="pagamentos.html" id="link-pagamentos">Pagamentos</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Área Central de Conteúdo -->
+        <main class="conteudo">
+            <header>
+                <h1>Cadastro de Veículos</h1>
+                <span>Logado como: Admin Sistema</span>
+            </header>
+            
+            <!-- Formulário de Cadastro -->
+            <section class="formulario-box">
+                <form id="form-veiculo">
+                    <div class="input-group">
+                        <label for="id_cliente">Proprietário (Cliente):</label>
+                        <select id="id_cliente" required>
+                            <option value="">Carregando clientes...</option>
+                            <!-- Injetado via JS -->
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="placa">Placa:</label>
+                        <input type="text" id="placa" placeholder="Ex: ABC-1234" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="modelo">Modelo:</label>
+                        <input type="text" id="modelo" placeholder="Ex: Honda Civic" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="cor">Cor:</label>
+                        <input type="text" id="cor" placeholder="Ex: Prata">
+                    </div>
+
+                    <button type="submit" class="btn-salvar">Salvar Veículo</button>
+                </form>
+            </section>
+
+            <!-- Tabela de Listagem -->
+            <section class="tabela-box">
+                <h2>Veículos Cadastrados</h2>
+                <table id="tabela-veiculos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Placa</th>
+                            <th>Modelo</th>
+                            <th>Cor</th>
+                            <th>ID Cliente</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Os dados serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script de integração com a API -->
+    <script src="../js/veiculos.js"></script>
+</body>
+</html>
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from datetime import datetime, date, time, timedelta
 from typing import Optional
 
@@ -140,12 +141,52 @@ def registrar_entrada(mov_in: MovimentacaoEntradaCreate, db: Session) -> Movimen
         db.commit()
         db.refresh(nova)
         return nova
+=======
+from datetime import datetime
+from sqlmodel import Session, select
+from sqlalchemy import text
+from sqlalchemy.exc import OperationalError, IntegrityError
+
+from entidades.entidades import Movimentacao, Vaga, StatusVagaEnum
+from modelos.schemas import MovimentacaoEntradaCreate, MovimentacaoSaidaUpdate
+
+def registrar_entrada(mov_in: MovimentacaoEntradaCreate, db: Session) -> Movimentacao:
+    try:
+        # REGRA CRÍTICA DE AUDITORIA: Injeta a variável antes do DML[cite: 1, 2]
+        auditoria_sql = text(f"SET @usuario_logado = 'ID: {mov_in.id_usuario_logado} - {mov_in.nome_usuario_logado}'")
+        db.execute(auditoria_sql)
+
+        # Verifica se a vaga existe e está livre
+        vaga = db.get(Vaga, mov_in.id_vaga)
+        if not vaga:
+            raise KeyError(f"Vaga de ID {mov_in.id_vaga} não encontrada.")
+        if vaga.status == StatusVagaEnum.Ocupada:
+            raise ValueError(f"A vaga {vaga.codigo_vaga} já está ocupada.")
+
+        # Cria a movimentação
+        nova_movimentacao = Movimentacao(
+            id_veiculo=mov_in.id_veiculo,
+            id_vaga=mov_in.id_vaga,
+            data_entrada=datetime.now(),
+            id_usuario_entrada=mov_in.id_usuario_entrada
+        )
+
+        # Atualiza o status da vaga para Ocupada
+        vaga.status = StatusVagaEnum.Ocupada
+        db.add(vaga)
+
+        db.add(nova_movimentacao)
+        db.commit()
+        db.refresh(nova_movimentacao)
+        return nova_movimentacao
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     except IntegrityError as e:
         db.rollback()
         raise ValueError("Erro de integridade ao registrar entrada (Veículo ou Vaga inválidos).") from e
     except OperationalError as e:
         db.rollback()
         raise RuntimeError("Falha de comunicação com o banco de dados.") from e
+<<<<<<< HEAD
     except (ValueError, KeyError):
         db.rollback()
         raise
@@ -158,6 +199,16 @@ def buscar_movimentacoes(db: Session) -> list[Movimentacao]:
         raise RuntimeError("Falha de comunicação com o banco de dados.") from e
 
 
+=======
+
+def buscar_movimentacoes(db: Session) -> list[Movimentacao]:
+    try:
+        statement = select(Movimentacao)
+        return db.exec(statement).all()
+    except OperationalError as e:
+        raise RuntimeError("Falha de comunicação com o banco de dados.") from e
+
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 def buscar_movimentacao_por_id(id_movimentacao: int, db: Session) -> Movimentacao:
     try:
         mov = db.get(Movimentacao, id_movimentacao)
@@ -167,6 +218,7 @@ def buscar_movimentacao_por_id(id_movimentacao: int, db: Session) -> Movimentaca
     except OperationalError as e:
         raise RuntimeError("Falha de comunicação com o banco de dados.") from e
 
+<<<<<<< HEAD
 
 def _valor_da_saida(mov: Movimentacao, vaga: Optional[Vaga], agora: datetime, db: Session):
     """Devolve (valor, preço usado). Vaga de mensalista não cobra por hora (None).
@@ -215,6 +267,9 @@ def previa_saida(id_movimentacao: int, db: Session) -> dict:
 def registrar_saida(id_movimentacao: int, saida_in: MovimentacaoSaidaUpdate, db: Session) -> dict:
     """Registra a saída, libera a vaga e, em vaga de horista, calcula o valor e
     registra o pagamento (com a forma de pagamento) automaticamente."""
+=======
+def registrar_saida(id_movimentacao: int, saida_in: MovimentacaoSaidaUpdate, db: Session) -> Movimentacao:
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     try:
         mov = db.get(Movimentacao, id_movimentacao)
         if not mov:
@@ -222,6 +277,7 @@ def registrar_saida(id_movimentacao: int, saida_in: MovimentacaoSaidaUpdate, db:
         if mov.data_saida is not None:
             raise ValueError("Esta movimentação já possui registro de saída.")
 
+<<<<<<< HEAD
         aplicar_auditoria(db, saida_in.id_usuario_logado, saida_in.nome_usuario_logado)
 
         agora = agora_local()
@@ -369,3 +425,26 @@ def consultar_modo_entrada(id_veiculo: int, db: Session) -> dict:
         return modo_de_entrada(db, veiculo)
     except OperationalError as e:
         raise RuntimeError("Falha de comunicação com o banco de dados.") from e
+=======
+        # REGRA CRÍTICA DE AUDITORIA[cite: 1, 2]
+        auditoria_sql = text(f"SET @usuario_logado = 'ID: {saida_in.id_usuario_logado} - {saida_in.nome_usuario_logado}'")
+        db.execute(auditoria_sql)
+
+        # Atualiza dados de saída
+        mov.data_saida = datetime.now()
+        mov.id_usuario_saida = saida_in.id_usuario_saida
+
+        # Libera a vaga associada
+        vaga = db.get(Vaga, mov.id_vaga)
+        if vaga:
+            vaga.status = StatusVagaEnum.Livre
+            db.add(vaga)
+
+        db.add(mov)
+        db.commit()
+        db.refresh(mov)
+        return mov
+    except OperationalError as e:
+        db.rollback()
+        raise RuntimeError("Falha de comunicação com o banco de dados.") from e
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

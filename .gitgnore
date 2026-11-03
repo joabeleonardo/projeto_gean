@@ -1,0 +1,41 @@
+# Ambiente virtual
+venv/
+.venv/
+env/
+ENV/
+
+# Variáveis de ambiente e credenciais
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Testes e cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE / VS Code
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Banco de dados local
+*.db
+*.sqlite
+*.sqlite3

@@ -2,7 +2,12 @@ fastapi[standard]
 mysql-connector-python
 python-dotenv
 sqlmodel
+<<<<<<< HEAD
 pyjwt
 tzdata
 pytest
 httpx
+=======
+pytest
+httpx
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

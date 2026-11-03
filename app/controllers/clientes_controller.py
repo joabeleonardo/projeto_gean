@@ -1,5 +1,9 @@
 from sqlmodel import Session, select
+<<<<<<< HEAD
 from controllers.auditoria import aplicar_auditoria
+=======
+from sqlalchemy import text
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 from sqlalchemy.exc import OperationalError, IntegrityError
 from entidades.entidades import Cliente
 from modelos.schemas import ClienteCreate
@@ -7,9 +11,16 @@ from modelos.schemas import ClienteCreate
 def inserir_cliente(cliente_in: ClienteCreate, db: Session) -> Cliente:
     try:
         # REGRA CRÍTICA DE AUDITORIA
+<<<<<<< HEAD
         aplicar_auditoria(db, cliente_in.id_usuario_logado, cliente_in.nome_usuario_logado)
 
         cliente_insert = Cliente.model_validate(cliente_in.model_dump(mode="json", exclude={"id_usuario_logado", "nome_usuario_logado"}))
+=======
+        auditoria_sql = text(f"SET @usuario_logado = 'ID: {cliente_in.id_usuario_logado} - {cliente_in.nome_usuario_logado}'")
+        db.execute(auditoria_sql)
+
+        cliente_insert = Cliente.model_validate(cliente_in)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
         db.add(cliente_insert)
         db.commit()
         db.refresh(cliente_insert)
@@ -44,6 +55,7 @@ def atualizar_cliente(id_cliente: int, dados_atualizados: ClienteCreate, db: Ses
             raise KeyError(f"Cliente de ID {id_cliente} não encontrado.")
         
         # REGRA CRÍTICA DE AUDITORIA
+<<<<<<< HEAD
         aplicar_auditoria(db, dados_atualizados.id_usuario_logado, dados_atualizados.nome_usuario_logado)
 
         cliente_data = dados_atualizados.model_dump(mode="json", exclude_unset=True, exclude={"id_usuario_logado", "nome_usuario_logado"})
@@ -53,6 +65,12 @@ def atualizar_cliente(id_cliente: int, dados_atualizados: ClienteCreate, db: Ses
             atual = getattr(cliente, campo)
             if novo is not None and str(getattr(atual, "value", atual)) != str(novo):
                 raise ValueError("O CPF/CNPJ do cliente não pode ser alterado pelo sistema.")
+=======
+        auditoria_sql = text(f"SET @usuario_logado = 'ID: {dados_atualizados.id_usuario_logado} - {dados_atualizados.nome_usuario_logado}'")
+        db.execute(auditoria_sql)
+
+        cliente_data = dados_atualizados.model_dump(exclude_unset=True, exclude={"id_usuario_logado", "nome_usuario_logado"})
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
         for key, value in cliente_data.items():
             setattr(cliente, key, value)
         
@@ -74,12 +92,18 @@ def deletar_cliente(id_cliente: int, id_usuario_logado: int, nome_usuario_logado
             raise KeyError(f"Cliente de ID {id_cliente} não encontrado.")
         
         # REGRA CRÍTICA DE AUDITORIA
+<<<<<<< HEAD
         aplicar_auditoria(db, id_usuario_logado, nome_usuario_logado)
+=======
+        auditoria_sql = text(f"SET @usuario_logado = 'ID: {id_usuario_logado} - {nome_usuario_logado}'")
+        db.execute(auditoria_sql)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
         
         db.delete(cliente)
         db.commit()
     except OperationalError as e:
         db.rollback()
+<<<<<<< HEAD
         raise RuntimeError("Falha de comunicação com o banco de dados.") from e
 
 # ------------------------------------------------------------------ busca
@@ -239,3 +263,6 @@ def _condicao_geral(termo: str):
         condicoes.append(col(Cliente.id).in_(select(Veiculo.id_cliente).where(
             func.replace(func.upper(Veiculo.placa), "-", "").like(f"%{placa}%"))))
     return or_(*condicoes)
+=======
+        raise RuntimeError("Falha de comunicação com o banco de dados.") from e
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272

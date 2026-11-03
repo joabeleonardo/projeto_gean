@@ -1,13 +1,20 @@
 import pytest
 from fastapi import FastAPI
+<<<<<<< HEAD
 from fastapi.testclient import TestClient as ClienteHttp
+=======
+from fastapi.testclient import TestClient
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 from unittest.mock import patch, MagicMock
 
 from rotas.vagas_rotas import vagas_router
 from entidades.entidades import Vaga, TipoVagaEnum, StatusVagaEnum
 from dependencies.database import get_db
+<<<<<<< HEAD
 from dependencies.auth import get_usuario_atual
 from entidades.entidades import Usuario as _Usuario, PerfilEnum as _Perfil
+=======
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 # Configura o app e rota de teste
 app = FastAPI()
@@ -18,12 +25,18 @@ def override_get_db():
     yield MagicMock()
 
 app.dependency_overrides[get_db] = override_get_db
+<<<<<<< HEAD
 app.dependency_overrides[get_usuario_atual] = lambda: _Usuario(
     id=1, nome="Admin Sistema", login="admin", senha="x", perfil=_Perfil.Administrador
 )
 
 # Faz chamada simulando rotas
 client = ClienteHttp(app)
+=======
+
+# Faz chamada simulando rotas
+client = TestClient(app)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 # ==========================================
 # DADOS MOCKADOS

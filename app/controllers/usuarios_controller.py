@@ -1,4 +1,5 @@
 from sqlmodel import Session, select
+<<<<<<< HEAD
 from controllers.auditoria import aplicar_auditoria
 from sqlalchemy.exc import OperationalError, IntegrityError
 
@@ -6,10 +7,18 @@ from entidades.entidades import Usuario, PerfilEnum
 from modelos.schemas import UsuarioCreate, UsuarioUpdate
 from servicos.seguranca import gerar_hash_senha, verificar_senha, senha_esta_em_hash
 import os
+=======
+from sqlalchemy import text
+from sqlalchemy.exc import OperationalError, IntegrityError
+
+from entidades.entidades import Usuario
+from modelos.schemas import UsuarioCreate
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
 
 def inserir_usuario(usuario_in: UsuarioCreate, db: Session) -> Usuario:
     try:
         # REGRA CRÍTICA DE AUDITORIA[cite: 1, 2]
+<<<<<<< HEAD
         aplicar_auditoria(db, usuario_in.id_usuario_logado, usuario_in.nome_usuario_logado)
 
         dados = usuario_in.model_dump(mode="json", exclude={"id_usuario_logado", "nome_usuario_logado"})
@@ -20,6 +29,12 @@ def inserir_usuario(usuario_in: UsuarioCreate, db: Session) -> Usuario:
                 raise ValueError("Somente administradores podem ter código de liberação.")
             dados["codigo_liberacao"] = gerar_hash_senha(codigo)
         usuario_insert = Usuario.model_validate(dados)
+=======
+        auditoria_sql = text(f"SET @usuario_logado = 'ID: {usuario_in.id_usuario_logado} - {usuario_in.nome_usuario_logado}'")
+        db.execute(auditoria_sql)
+
+        usuario_insert = Usuario.model_validate(usuario_in, exclude={"id_usuario_logado", "nome_usuario_logado"})
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
         db.add(usuario_insert)
         db.commit()
         db.refresh(usuario_insert)
@@ -47,13 +62,18 @@ def buscar_usuario_por_id(id_usuario: int, db: Session) -> Usuario:
     except OperationalError as e:
         raise RuntimeError("Falha de comunicação com o banco de dados.") from e
 
+<<<<<<< HEAD
 def atualizar_usuario(id_usuario: int, dados_atualizados: UsuarioUpdate, db: Session) -> Usuario:
+=======
+def atualizar_usuario(id_usuario: int, dados_atualizados: UsuarioCreate, db: Session) -> Usuario:
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
     try:
         usuario = db.get(Usuario, id_usuario)
         if not usuario:
             raise KeyError(f"Usuário de ID {id_usuario} não encontrado.")
         
         # REGRA CRÍTICA DE AUDITORIA[cite: 1, 2]
+<<<<<<< HEAD
         aplicar_auditoria(db, dados_atualizados.id_usuario_logado, dados_atualizados.nome_usuario_logado)
 
         usuario_data = dados_atualizados.model_dump(exclude_unset=True, exclude={"id_usuario_logado", "nome_usuario_logado"})
@@ -70,6 +90,14 @@ def atualizar_usuario(id_usuario: int, dados_atualizados: UsuarioUpdate, db: Ses
             usuario.codigo_liberacao = None  # só administrador tem código de liberação
         elif novo_codigo:
             usuario.codigo_liberacao = gerar_hash_senha(novo_codigo)
+=======
+        auditoria_sql = text(f"SET @usuario_logado = 'ID: {dados_atualizados.id_usuario_logado} - {dados_atualizados.nome_usuario_logado}'")
+        db.execute(auditoria_sql)
+
+        usuario_data = dados_atualizados.model_dump(exclude_unset=True, exclude={"id_usuario_logado", "nome_usuario_logado"})
+        for key, value in usuario_data.items():
+            setattr(usuario, key, value)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
         
         db.add(usuario)
         db.commit()
@@ -89,12 +117,18 @@ def deletar_usuario(id_usuario: int, id_usuario_logado: int, nome_usuario_logado
             raise KeyError(f"Usuário de ID {id_usuario} não encontrado.")
         
         # REGRA CRÍTICA DE AUDITORIA[cite: 1, 2]
+<<<<<<< HEAD
         aplicar_auditoria(db, id_usuario_logado, nome_usuario_logado)
+=======
+        auditoria_sql = text(f"SET @usuario_logado = 'ID: {id_usuario_logado} - {nome_usuario_logado}'")
+        db.execute(auditoria_sql)
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
         
         db.delete(usuario)
         db.commit()
     except OperationalError as e:
         db.rollback()
+<<<<<<< HEAD
         raise RuntimeError("Falha de comunicação com o banco de dados.") from e
 
 
@@ -159,3 +193,6 @@ def autorizar_liberacao(codigo: str, db: Session):
         if eh_admin and verificar_senha(codigo, admin.codigo_liberacao):
             return admin
     return None
+=======
+        raise RuntimeError("Falha de comunicação com o banco de dados.") from e
+>>>>>>> e1168e0b2866878a1368d6f2183807561c179272
